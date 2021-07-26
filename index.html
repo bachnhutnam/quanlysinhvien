@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý nhân sự</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body onload="renderListPersonnel()">
+    <div class="container">
+        <form>
+            <div class="form-personnel">
+                <h3>Thông tin nhân sự</h3>
+                <label>Full name: </label> 
+                <input type="text" name="" id="fullName">
+                <span id="fullname-error" class="error"></span>
+                <br>
+                
+                <label>Email: </label>
+                <input type="text" name="" id="email">
+                <span id="email-error" class="error"></span>
+                <br>
+                
+                <label>Phone: </label>
+                <input type="text" name="" id="phone">
+                <span id="phone-error" class="error"></span>
+                <br>
+                
+                <label>Address: </label>
+                <input type="text" name="" id="address">
+                <span id="address-error" class="error"></span>
+                <br>
+                
+                <label>Hệ số lương: </label>
+                <input type="text" name="" id="hesoluong">
+                <span id="hesoluong-error" class="error"></span>
+                <br>
+                
+                <label>Lương: </label>
+                <input type="text" name="" id="luong">
+                <span id="luong-error" class="error"></span>
+                <br>
+                
+                <label>Sex: </label>
+                <input type="radio" name="gender" id="male" value="1">Nam
+                <input type="radio" name="gender" id="female" value="0">Nữ
+                <span id="gender-error" class="error"></span>
+                <br>
+    
+                <label>&nbsp;</label>
+                <span class="option">
+                    <button onclick="save()">Save</button>
+                    <input onreset="reset()" type="reset" name="reset" value="Làm lại">
+                </span>
+            
+            </div>
+        </form>
+    
+        <div class="list-personnel" id="list-personnel">
+            <h3>List personnel</h3>
+            <table id="grid-personnels" width="600px" border="1">
+            </table>
+        </div>
+    </div>
+    
+    <script src="./personnel.js"></script>
+    <script src='https://cdn.jsdelivr.net/g/lodash@4(lodash.min.js+lodash.fp.min.js)'></script>
+</body>
+</html>
+
+<!-- Note bug
+    - reset chưa ẩn error-mess
+    - nội dung chưa đúng chuẩn vẫn add vào table
+-->
