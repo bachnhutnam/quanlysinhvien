@@ -1,10 +1,9 @@
 function save() {
     let fullname = document.getElementById('fullName').value;
+    let mssv = document.getElementById('mssv').value;
     let email = document.getElementById('email').value;
     let phone = document.getElementById('phone').value;
     let address = document.getElementById('address').value;
-    let hesoluong = document.getElementById('hesoluong').value;
-    let luong = document.getElementById('luong').value;
 
     let gender = '';
     if (document.getElementById('male').checked) {
@@ -48,16 +47,10 @@ function save() {
         document.getElementById('address-error').innerHTML = '';
     }
 
-    if (_.isEmpty(luong)) { 
-        document.getElementById('luong-error').innerHTML = '*vui long nhap lương';
+    if (_.isEmpty(mssv)) { 
+        document.getElementById('mssv-error').innerHTML = '*vui long nhap lương';
     } else {
-        document.getElementById('luong-error').innerHTML = '';
-    }
-
-    if (_.isEmpty(hesoluong)) {
-        document.getElementById('hesoluong-error').innerHTML = '*vui long nhap hệ số lương';
-    } else {
-        document.getElementById('hesoluong-error').innerHTML = '';
+        document.getElementById('mssv-error').innerHTML = '';
     }
 
     if (_.isEmpty(gender)) {
@@ -66,20 +59,19 @@ function save() {
         document.getElementById('gender-error').innerHTML = ''
     }
 
-    if (fullname && email && phone && address && hesoluong && luong && gender) {
-        let personnels = localStorage.getItem('personnels') ? JSON.parse(localStorage.getItem('personnels')) : [];
+    if (fullname && email && phone && address && mssv && gender) {
+        let students = localStorage.getItem('students') ? JSON.parse(localStorage.getItem('students')) : [];
 
-        personnels.push({
+        students.push({
             fullname: fullname, 
+            mssv: mssv, 
             email: email, 
             phone: phone, 
             address: address, 
-            hesoluong: hesoluong, 
-            luong: luong, 
             gender: gender, 
         }); 
 
-        localStorage.setItem('personnels', JSON.stringify(personnels));
+        localStorage.setItem('students', JSON.stringify(students));
 
         this.renderListPersonnel();
     }
@@ -90,65 +82,62 @@ function emailIsValid(email) {
 }
 
 function renderListPersonnel() {
-    let personnels = localStorage.getItem('personnels') ? JSON.parse(localStorage.getItem('personnels')) : [];
+    let students = localStorage.getItem('students') ? JSON.parse(localStorage.getItem('students')) : [];
 
-    if (personnels.length === 0) {
-        document.getElementById('list-personnel').style.display = 'none';
+    if (students.length === 0) {
+        document.getElementById('list-student').style.display = 'none';
         return false;
     } 
 
-    document.getElementById('list-personnel').style.display = 'block';
+    document.getElementById('list-student').style.display = 'block';
 
     let tableContent = `<tr>
         <td>#</td>
         <td>Full name</td>
+        <td>MSSV</td>
         <td>Email</td>
         <td>Phone</td>
         <td>Gender</td>
         <td>Address</td>
-        <td>hesoluong</td>
-        <td>Luong</td>
         <td>Option</td>
     </tr>`;
 
-    personnels.forEach((personnel, index) => {
-        let personnelID = index;
-        let genderLabel = parseInt(personnel.gender) === 1 ? 'Nam' : 'Nữ';
+    students.forEach((student, index) => {
+        let studentID = index;
+        let genderLabel = parseInt(student.gender) === 1 ? 'Nam' : 'Nữ';
         index++;
 
         tableContent += `<tr>
             <td>${index}</td>
-            <td>${personnel.fullname}</td>
-            <td>${personnel.email}</td>
-            <td>${personnel.phone}</td>
+            <td>${student.fullname}</td>
+            <td>${student.mssv}</td>
+            <td>${student.email}</td>
+            <td>${student.phone}</td>
             <td>${genderLabel}</td>
-            <td>${personnel.address}</td>
-            <td>${personnel.hesoluong}</td>
-            <td>${personnel.luong}</td>
+            <td>${student.address}</td>
             <td>
-                <a href="#" onclick='deletePersonnel(${personnelID})'>Delete</a>
+                <a href="#" onclick='deletePersonnel(${studentID})'>Delete</a>
             </td>
         </tr>`;
     });
 
-    document.getElementById('grid-personnels').innerHTML = tableContent;
+    document.getElementById('grid-students').innerHTML = tableContent;
 }
 
 function deletePersonnel (id) {
-    let personnels = localStorage.getItem('personnels') ? JSON.parse(localStorage.getItem('personnels')) : [];
-    personnels.splice(id, 1);
-    localStorage.setItem('personnels', JSON.stringify(personnels));
+    let students = localStorage.getItem('students') ? JSON.parse(localStorage.getItem('students')) : [];
+    students.splice(id, 1);
+    localStorage.setItem('students', JSON.stringify(students));
     renderListPersonnel();
 }
 
 function reset() {
     let check;
     document.getElementById('fullName-error').innerHTML = '';
+    document.getElementById('mssv-error').innerHTML = '';
     document.getElementById('email-error').innerHTML = '';
     document.getElementById('phone-error').innerHTML = '';
     document.getElementById('address-error').innerHTML = '';
-    document.getElementById('hesoluong-error').innerHTML = '';
-    document.getElementById('luong-error').innerHTML = '';
     check = true;
     return check;
 }

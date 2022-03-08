@@ -6,7 +6,7 @@ body {
     background: #ddd;
 }
 
-.form-personnel, .list-personnel {
+.form-student, .list-student {
     width: 30%;
     border: 1px solid #ccc;
     margin: 2%;
@@ -15,7 +15,7 @@ body {
     background: #ccc;
 }
 
-.list-personnel{
+.list-student{
     width: 55%;
     margin-left: 0;
 }
@@ -27,13 +27,13 @@ h3 {
     background: #999;
 }
 
-.form-personnel label {
+.form-student label {
     width: 30%;
     float: left;
     margin-left: 5%;    
 }
 
-.form-personnel input[type="text"] {
+.form-student input[type="text"] {
     width: 50%;
     padding: 1%;
 }
